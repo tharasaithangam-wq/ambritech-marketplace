@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ambritech Marketplace</title>
+  <meta name="description" content="B2B spices & masala marketplace — Request quotes directly from Ambritech." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --card2:#0c1628;
+      --text:#eaf0ff;
+      --muted:#a9b6d6;
+      --line:#223255;
+      --brand:#ff6a00;
+      --brand2:#ff8a34;
+      --good:#2be4a7;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:14px;
+      --max:1180px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--font);
+      color:var(--text); background: radial-gradient(1100px 700px at 20% -10%, #1a2b52 0%, transparent 60%),
+                         radial-gradient(1000px 700px at 120% 10%, #3a204f 0%, transparent 55%),
+                         linear-gradient(180deg, #070b14 0%, #0b1220 30%, #070b14 100%);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .topbar{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.65);
+      border-bottom:1px solid rgba(34,50,85,.6);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 25px rgba(255,106,0,.25);
+      display:grid; place-items:center; font-weight:800;
+    }
+    .brand h1{font-size:14px; margin:0; letter-spacing:.2px}
+    .brand small{display:block; color:var(--muted); font-weight:600; margin-top:2px}
+    .nav{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      padding:9px 12px; border-radius:999px;
+      border:1px solid rgba(34,50,85,.9);
+      background: rgba(15,26,46,.45);
+      color:var(--text);
+      font-weight:700; font-size:13px;
+    }
+    .pill:hover{border-color:rgba(255,106,0,.7)}
+    .btn{
+      padding:10px 14px; border-radius:999px;
+      border:1px solid rgba(255,106,0,.45);
+      background: linear-gradient(135deg, rgba(255,106,0,.95), rgba(255,138,52,.95));
+      box-shadow: 0 12px 30px rgba(255,106,0,.18);
+      color:#1b0c00;
+      font-weight:900; font-size:13px;
+      cursor:pointer;
+    }
+    .btn:active{transform: translateY(1px)}
+    .hero{
+      padding:28px 0 10px;
+    }
+    .heroGrid{
+      display:grid; gap:16px;
+      grid-template-columns: 320px 1fr;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns: 1fr}
+    }
+    .panel{
+      border:1px solid rgba(34,50,85,.75);
+      background: linear-gradient(180deg, rgba(15,26,46,.55), rgba(12,22,40,.55));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel .hd{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(34,50,85,.5);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .panel .hd b{font-size:14px}
+    .panel .bd{padding:14px}
+    .catList{display:flex; flex-direction:column; gap:8px}
+    .cat{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(34,50,85,.65);
+      background: rgba(12,22,40,.35);
+      font-weight:800; font-size:13px;
+    }
+    .cat span{color:var(--muted); font-weight:800; font-size:12px}
+    .cat:hover{border-color:rgba(255,106,0,.6)}
+    .big{
+      padding:22px;
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(255,106,0,.18) 0%, transparent 60%),
+        radial-gradient(700px 520px at 120% 20%, rgba(43,228,167,.12) 0%, transparent 55%),
+        linear-gradient(180deg, rgba(12,22,40,.55), rgba(15,26,46,.55));
+    }
+    .big h2{margin:0; font-size:28px; line-height:1.15}
+    .big p{margin:10px 0 0; color:var(--muted); font-weight:700}
+    .searchRow{
+      margin-top:16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .search{
+      flex:1 1 360px;
+      display:flex; gap:8px; align-items:center;
+      padding:10px 10px;
+      border-radius:999px;
+      border:1px solid rgba(34,50,85,.9);
+      background: rgba(7,11,20,.35);
+    }
+    .search input{
+      width:100%; background:transparent; border:none; outline:none;
+      color:var(--text); font-weight:800; font-size:14px;
+    }
+    .ghost{
+      padding:10px 14px; border-radius:999px;
+      border:1px solid rgba(34,50,85,.9);
+      background: rgba(12,22,40,.35);
+      color:var(--text); font-weight:900; font-size:13px;
+      cursor:pointer;
+    }
+    .ghost:hover{border-color:rgba(255,106,0,.55)}
+    .chips{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      padding:8px 10px; border-radius:999px;
+      border:1px dashed rgba(34,50,85,.9);
+      color:var(--muted); font-weight:800; font-size:12px;
+      cursor:pointer;
+    }
+    .chip:hover{color:var(--text); border-color:rgba(255,106,0,.55)}
+    .section{padding:14px 0 34px}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin:10px 0 12px;
+    }
+    .sectionTitle h3{margin:0; font-size:18px}
+    .sectionTitle small{color:var(--muted); font-weight:700}
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: 280px 1fr;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+    }
+    .filters .bd{display:flex; flex-direction:column; gap:10px}
+    label{font-size:12px; color:var(--muted); font-weight:800}
+    select, .range, .text{
+      width:100%;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(34,50,85,.8);
+      background: rgba(7,11,20,.35);
+      color:var(--text);
+      font-weight:800;
+      outline:none;
+    }
+    .muted{color:var(--muted)}
+    .products{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 980px){ .products{grid-template-columns: repeat(2, minmax(0,1fr));} }
+    @media (max-width: 560px){ .products{grid-template-columns: 1fr;} }
+
+    .card{
+      border:1px solid rgba(34,50,85,.7);
+      background: linear-gradient(180deg, rgba(15,26,46,.55), rgba(12,22,40,.55));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      min-height: 320px;
+    }
+    .img{
+      height:140px;
+      background:
+        radial-gradient(180px 120px at 30% 40%, rgba(255,106,0,.35), transparent 65%),
+        radial-gradient(180px 120px at 70% 30%, rgba(43,228,167,.25), transparent 60%),
+        linear-gradient(135deg, rgba(34,50,85,.55), rgba(15,26,46,.25));
+      border-bottom:1px solid rgba(34,50,85,.6);
+      display:flex; align-items:flex-end; justify-content:space-between;
+      padding:12px;
+      gap:10px;
+    }
+    .badge{
+      background: rgba(43,228,167,.14);
+      border: 1px solid rgba(43,228,167,.5);
+      color: var(--good);
+      padding:6px 10px; border-radius:999px;
+      font-size:12px; font-weight:900;
+    }
+    .tag{
+      background: rgba(255,106,0,.12);
+      border: 1px solid rgba(255,106,0,.45);
+      color: #ffd1b0;
+      padding:6px 10px; border-radius:999px;
+      font-size:12px; font-weight:900;
+    }
+    .card .content{padding:12px 12px 14px; display:flex; flex-direction:column; gap:10px; flex:1}
+    .card h4{margin:0; font-size:15px; line-height:1.25}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; color:var(--muted); font-weight:800; font-size:12px}
+    .meta span{
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(34,50,85,.75);
+      background: rgba(7,11,20,.25);
+    }
+    .actions{margin-top:auto; display:flex; gap:10px}
+    .outline{
+      flex:1;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(34,50,85,.9);
+      background: rgba(7,11,20,.25);
+      font-weight:900; font-size:13px;
+      cursor:pointer;
+      text-align:center;
+    }
+    .outline:hover{border-color:rgba(255,106,0,.55)}
+    .primary{
+      flex:1;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(255,106,0,.55);
+      background: linear-gradient(135deg, rgba(255,106,0,.95), rgba(255,138,52,.95));
+      color:#1b0c00;
+      font-weight:950; font-size:13px;
+      cursor:pointer;
+      text-align:center;
+    }
+    .foot{
+      padding:26px 0 40px;
+      border-top:1px solid rgba(34,50,85,.5);
+      color:var(--muted);
+    }
+    .footGrid{
+      display:grid; gap:14px;
+      grid-template-columns: 1.3fr 1fr 1fr;
+    }
+    @media (max-width: 980px){ .footGrid{grid-template-columns:1fr} }
+    .foot b{color:var(--text)}
+    .modal{
+      position:fixed; inset:0; display:none;
+      background: rgba(0,0,0,.55);
+      padding:18px;
+      z-index:100;
+    }
+    .modal.open{display:grid; place-items:center}
+    .modalCard{
+      width:min(720px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(34,50,85,.85);
+      background: linear-gradient(180deg, rgba(15,26,46,.92), rgba(12,22,40,.92));
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .modalHd{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(34,50,85,.55);
+    }
+    .modalHd b{font-size:14px}
+    .x{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(34,50,85,.9);
+      background: rgba(7,11,20,.25);
+      cursor:pointer;
+      font-weight:950;
+    }
+    .modalBd{padding:16px}
+    .form{
+      display:grid; gap:12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 760px){ .form{grid-template-columns:1fr} }
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+    .form .full{grid-column: 1 / -1}
+    .help{font-size:12px; color:var(--muted); font-weight:700}
+    .rowBtns{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; padding-top:10px}
+    .tiny{font-size:12px; font-weight:900; color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand">
+          <div class="logo">A</div>
+          <div>
+            <h1>Ambritech Marketplace</h1>
+            <small>B2B Spices & Masala • Wholesale Export</small>
+          </div>
+        </div>
+        <div class="nav">
+          <a class="pill" href="#products">Products</a>
+          <a class="pill" href="#suppliers">Supplier</a>
+          <a class="pill" href="#rfq" onclick="openRFQ('General RFQ')">RFQ</a>
+          <a class="pill" href="#contact">Contact</a>
+          <button class="btn" onclick="openRFQ('Request Quote')">Send Enquiry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="panel">
+          <div class="hd"><b>Categories</b><span class="tiny">Browse</span></div>
+          <div class="bd">
+            <div class="catList">
+              <a class="cat" href="#products" onclick="setCategory('Spices')">Whole Spices <span>MOQ available</span></a>
+              <a class="cat" href="#products" onclick="setCategory('Masala')">Masala Powders <span>Export packs</span></a>
+              <a class="cat" href="#products" onclick="setCategory('Blends')">Custom Blends <span>Private label</span></a>
+              <a class="cat" href="#products" onclick="setCategory('Bulk')">Bulk Wholesale <span>Containers</span></a>
+              <a class="cat" href="#products" onclick="setCategory('Packaging')">Packaging Options <span>1kg–25kg</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel big">
+          <h2>Find wholesale spices & masala powders — directly from India</h2>
+          <p>Search products, compare MOQ & packaging, and send an RFQ to get export price & lead time.</p>
+
+          <div class="searchRow">
+            <div class="search">
+              🔎
+              <input id="q" placeholder="Search: turmeric powder, chilli, cumin, garam masala..." oninput="applyFilters()" />
+            </div>
+            <button class="ghost" onclick="openRFQ('RFQ from Search')">Request Quote</button>
+            <a class="ghost" id="waBtn" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
+
+          <div class="chips">
+            <div class="chip" onclick="quickSearch('Turmeric Powder')">Turmeric Powder</div>
+            <div class="chip" onclick="quickSearch('Red Chilli Powder')">Red Chilli Powder</div>
+            <div class="chip" onclick="quickSearch('Cumin')">Cumin</div>
+            <div class="chip" onclick="quickSearch('Garam Masala')">Garam Masala</div>
+            <div class="chip" onclick="quickSearch('Coriander Powder')">Coriander Powder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="section" id="products">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <div>
+          <h3>Featured Products</h3>
+          <small class="muted">Alibaba-style listings • Enquiry/Quote based</small>
+        </div>
+        <small class="muted">Supplier: <b>Ambritech</b></small>
+      </div>
+
+      <div class="grid">
+        <!-- FILTERS -->
+        <div class="panel filters">
+          <div class="hd"><b>Filters</b><span class="tiny" id="count">0 items</span></div>
+          <div class="bd">
+            <div>
+              <label>Category</label>
+              <select id="cat" onchange="applyFilters()">
+                <option value="">All</option>
+                <option value="Spices">Whole Spices</option>
+                <option value="Masala">Masala Powders</option>
+                <option value="Blends">Custom Blends</option>
+                <option value="Bulk">Bulk Wholesale</option>
+                <option value="Packaging">Packaging Options</option>
+              </select>
+            </div>
+
+            <div>
+              <label>MOQ</label>
+              <select id="moq" onchange="applyFilters()">
+                <option value="">Any</option>
+                <option value="25">Up to 25 kg</option>
+                <option value="50">Up to 50 kg</option>
+                <option value="100">Up to 100 kg</option>
+                <option value="500">Up to 500 kg</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Origin</label>
+              <select id="origin" onchange="applyFilters()">
+                <option value="">Any</option>
+                <option value="Tamil Nadu, India">Tamil Nadu, India</option>
+                <option value="India">India</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Packaging</label>
+              <select id="pack" onchange="applyFilters()">
+                <option value="">Any</option>
+                <option value="1 kg">1 kg</option>
+                <option value="5 kg">5 kg</option>
+                <option value="10 kg">10 kg</option>
+                <option value="25 kg">25 kg</option>
+              </select>
+            </div>
+
+            <button class="btn" style="width:100%" onclick="resetFilters()">Reset</button>
+
+            <div class="help">
+              Tip: start with RFQ → we’ll reply with export price, lead time, and documents.
+            </div>
+          </div>
+        </div>
+
+        <!-- LIST -->
+        <div>
+          <div class="products" id="list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPLIER -->
+  <div class="section" id="suppliers">
+    <div class="wrap">
+      <div class="panel">
+        <div class="hd"><b>Supplier Profile</b><span class="tag">Verified documents</span></div>
+        <div class="bd">
+          <p style="margin:0 0 10px; color:var(--muted); font-weight:750">
+            <b>Ambritech Import Export OPC Private Limited</b> — spices & masala powders sourced from Tamil Nadu, India,
+            supplied in wholesale packaging for international buyers.
+          </p>
+          <div class="meta" style="margin-top:10px">
+            <span>IEC Available</span>
+            <span>MSME (Udyam) Registered</span>
+            <span>Private Label Support</span>
+            <span>Export-ready Packaging</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot" id="contact">
+    <div class="wrap">
+      <div class="footGrid">
+        <div>
+          <b>Ambritech Marketplace</b>
+          <p class="muted" style="margin:10px 0 0">
+            Request quotes for spices and masala powders. We respond with pricing, MOQ, lead time, and export documents.
+          </p>
+        </div>
+        <div>
+          <b>Quick Links</b>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px">
+            <a class="pill" href="#products">Browse Products</a>
+            <a class="pill" href="#rfq" onclick="openRFQ('General RFQ')">RFQ</a>
+          </div>
+        </div>
+        <div>
+          <b>Contact</b>
+          <p class="muted" style="margin:10px 0 0">
+            Email: <span id="emailText"></span><br/>
+            WhatsApp: <span id="waText"></span>
+          </p>
+        </div>
+      </div>
+      <p class="muted" style="margin:18px 0 0; font-weight:700">© <span id="yr"></span> Ambritech. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- RFQ MODAL -->
+  <div class="modal" id="rfq">
+    <div class="modalCard" role="dialog" aria-modal="true">
+      <div class="modalHd">
+        <b>Send Enquiry / RFQ</b>
+        <div class="x" onclick="closeRFQ()">✕</div>
+      </div>
+      <div class="modalBd">
+        <div class="help" style="margin-bottom:12px">
+          Fill this and we’ll reply with export price, MOQ, packaging, lead time, and shipping options.
+        </div>
+
+        <form class="form" onsubmit="submitRFQ(event)">
+          <div class="full">
+            <label>Product</label>
+            <input class="text" id="rfqProduct" placeholder="e.g., Turmeric Powder" required />
+          </div>
+
+          <div>
+            <label>Quantity (MOQ / requirement)</label>
+            <input class="text" id="rfqQty" placeholder="e.g., 100 kg" required />
+          </div>
+
+          <div>
+            <label>Destination Country</label>
+            <input class="text" id="rfqCountry" placeholder="e.g., Malaysia" required />
+          </div>
+
+          <div>
+            <label>Your Name / Company</label>
+            <input class="text" id="rfqName" placeholder="Buyer name / company" required />
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input class="text" id="rfqEmail" type="email" placeholder="buyer@email.com" required />
+          </div>
+
+          <div class="full">
+            <label>Message</label>
+            <textarea class="text" id="rfqMsg" placeholder="Packaging (1kg/5kg/25kg), target price, delivery time, etc."></textarea>
+          </div>
+
+          <div class="full rowBtns">
+            <button type="button" class="outline" onclick="sendWhatsAppRFQ()">Send via WhatsApp</button>
+            <button type="submit" class="primary">Send via Email</button>
+          </div>
+
+          <div class="full help">
+            Note: This demo opens your email client (mailto). Later we can connect to a real backend (PHP/Node) to store enquiries.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====== EDIT THESE ======
+    const BUSINESS_EMAIL = "sales@ambritech.com";   // <-- change
+    const WHATSAPP_NUMBER = "919999999999";        // <-- change (country code + number, no + sign)
+    // ========================
+
+    const products = [
+      {name:"Turmeric Powder", cat:"Masala", moq:50, origin:"Tamil Nadu, India", pack:["1 kg","5 kg","25 kg"], tag:"Hot Sale", badge:"Export Ready"},
+      {name:"Red Chilli Powder", cat:"Masala", moq:50, origin:"Tamil Nadu, India", pack:["1 kg","5 kg","25 kg"], tag:"Top Rated", badge:"Quality Checked"},
+      {name:"Coriander Powder", cat:"Masala", moq:50, origin:"India", pack:["1 kg","5 kg","25 kg"], tag:"Bulk", badge:"Fast Dispatch"},
+      {name:"Cumin Seeds", cat:"Spices", moq:100, origin:"India", pack:["5 kg","10 kg","25 kg"], tag:"Premium", badge:"Whole Spice"},
+      {name:"Black Pepper", cat:"Spices", moq:100, origin:"India", pack:["5 kg","10 kg","25 kg"], tag:"Trending", badge:"Export Grade"},
+      {name:"Garam Masala", cat:"Blends", moq:25, origin:"Tamil Nadu, India", pack:["1 kg","5 kg","25 kg"], tag:"Custom", badge:"Blend Support"},
+      {name:"Sambar Powder", cat:"Blends", moq:25, origin:"Tamil Nadu, India", pack:["1 kg","5 kg","25 kg"], tag:"Private Label", badge:"Retail Packs"},
+      {name:"Bulk Wholesale Mix", cat:"Bulk", moq:500, origin:"India", pack:["25 kg"], tag:"Container", badge:"Wholesale"},
+      {name:"Packaging Options", cat:"Packaging", moq:25, origin:"India", pack:["1 kg","5 kg","10 kg","25 kg"], tag:"Support", badge:"Export Packing"},
+    ];
+
+    const list = document.getElementById("list");
+    const count = document.getElementById("count");
+    document.getElementById("yr").textContent = new Date().getFullYear();
+
+    // setup contact UI
+    document.getElementById("emailText").textContent = BUSINESS_EMAIL;
+    const waDisplay = "+" + WHATSAPP_NUMBER;
+    document.getElementById("waText").textContent = waDisplay;
+
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Ambritech, I want to request a quote.")}`;
+    document.getElementById("waBtn").href = waLink;
+
+    function card(p){
+      const packs = p.pack.map(x=>`<span>${x}</span>`).join("");
+      return `
+        <div class="card" data-name="${p.name.toLowerCase()}" data-cat="${p.cat}" data-moq="${p.moq}"
+             data-origin="${p.origin}" data-pack="${p.pack.join(",")}">
+          <div class="img">
+            <div class="badge">${p.badge}</div>
+            <div class="tag">${p.tag}</div>
+          </div>
+          <div class="content">
+            <h4>${p.name}</h4>
+            <div class="meta">
+              <span>MOQ: ${p.moq} kg</span>
+              <span>${p.origin}</span>
+            </div>
+            <div class="meta">${packs}</div>
+            <div class="actions">
+              <div class="outline" onclick="openRFQ('${p.name}')">Details</div>
+              <div class="primary" onclick="openRFQ('${p.name}')">Send Enquiry</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function render(items){
+      list.innerHTML = items.map(card).join("");
+      count.textContent = `${items.length} items`;
+    }
+
+    function applyFilters(){
+      const q = (document.getElementById("q").value || "").trim().toLowerCase();
+      const cat = document.getElementById("cat").value;
+      const moq = document.getElementById("moq").value;
+      const origin = document.getElementById("origin").value;
+      const pack = document.getElementById("pack").value;
+
+      let items = products.filter(p=>{
+        const okQ = !q || p.name.toLowerCase().includes(q);
+        const okCat = !cat || p.cat === cat;
+        const okMoq = !moq || p.moq <= Number(moq);
+        const okOrigin = !origin || p.origin === origin;
+        const okPack = !pack || p.pack.includes(pack);
+        return okQ && okCat && okMoq && okOrigin && okPack;
+      });
+
+      render(items);
+    }
+
+    function resetFilters(){
+      document.getElementById("q").value = "";
+      document.getElementById("cat").value = "";
+      document.getElementById("moq").value = "";
+      document.getElementById("origin").value = "";
+      document.getElementById("pack").value = "";
+      applyFilters();
+    }
+
+    function quickSearch(text){
+      document.getElementById("q").value = text;
+      applyFilters();
+      document.getElementById("q").scrollIntoView({behavior:"smooth", block:"center"});
+    }
+
+    function setCategory(category){
+      document.getElementById("cat").value = category === 'Masala' ? 'Masala'
+        : category === 'Spices' ? 'Spices'
+        : category === 'Blends' ? 'Blends'
+        : category === 'Bulk' ? 'Bulk'
+        : category === 'Packaging' ? 'Packaging'
+        : '';
+      applyFilters();
+    }
+
+    // RFQ modal
+    function openRFQ(productName){
+      document.getElementById("rfqProduct").value = productName || "General RFQ";
+      document.getElementById("rfq").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeRFQ(){
+      document.getElementById("rfq").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeRFQ(); });
+    document.getElementById("rfq").addEventListener("click",(e)=>{ if(e.target.id==="rfq") closeRFQ(); });
+
+    function submitRFQ(e){
+      e.preventDefault();
+      const product = document.getElementById("rfqProduct").value.trim();
+      const qty = document.getElementById("rfqQty").value.trim();
+      const country = document.getElementById("rfqCountry").value.trim();
+      const name = document.getElementById("rfqName").value.trim();
+      const email = document.getElementById("rfqEmail").value.trim();
+      const msg = document.getElementById("rfqMsg").value.trim();
+
+      const subject = `RFQ: ${product} (${qty}) to ${country}`;
+      const body =
+`Hello Ambritech,
+
+Product: ${product}
+Quantity: ${qty}
+Destination: ${country}
+
+Buyer: ${name}
+Buyer Email: ${email}
+
+Message:
+${msg || "-"}
+`;
+
+      const mailto = `mailto:${encodeURIComponent(BUSINESS_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      closeRFQ();
+    }
+
+    function sendWhatsAppRFQ(){
+      const product = document.getElementById("rfqProduct").value.trim();
+      const qty = document.getElementById("rfqQty").value.trim();
+      const country = document.getElementById("rfqCountry").value.trim();
+      const name = document.getElementById("rfqName").value.trim();
+      const email = document.getElementById("rfqEmail").value.trim();
+      const msg = document.getElementById("rfqMsg").value.trim();
+
+      const text =
+`Hello Ambritech,
+I want a quote.
+
+Product: ${product}
+Quantity: ${qty}
+Destination: ${country}
+Name/Company: ${name}
+Email: ${email}
+Message: ${msg || "-"}`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    // initial render
+    render(products);
+    applyFilters();
+  </script>
+
+</body>
+</html>
+const BUSINESS_EMAIL = "Tharasaithangam@ambritech.io";
+const WHATSAPP_NUMBER = "918270802722";
